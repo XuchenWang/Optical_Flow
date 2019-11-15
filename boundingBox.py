@@ -1,7 +1,6 @@
 import cv2
 import createMask
 
-cv2.boundingRect()
 
 def boundingBox(firstFrame):
     mask = createMask.main(firstFrame)

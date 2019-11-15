@@ -11,7 +11,7 @@ from skimage.io import imsave
 def maskImage(img, output_name):
 
 	mask_, bbox_ = draw_mask(img)
-	# imsave(str(output_name)+'_mask.png', mask_)
+	imsave(str(output_name)+'_mask.png', mask_)
 
 	return mask_
 

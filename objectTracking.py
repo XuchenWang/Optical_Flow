@@ -1,9 +1,10 @@
 import skvideo.io
 from boundingBox import boundingBox
-
+import scipy.misc
 def objectTracking(rawVideo):
     videodata = skvideo.io.vread(rawVideo)
-    box_corner = boundingBox(videodata[0,:,:,:])
+    scipy.misc.imsave('firstFrame.jpg', videodata[0,:,:,:])
+    # box_corner = boundingBox(videodata[0,:,:,:])
 
 
 
