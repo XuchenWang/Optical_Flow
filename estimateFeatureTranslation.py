@@ -1,0 +1,2 @@
+def estimateFeatureTranslation():
+    return None
