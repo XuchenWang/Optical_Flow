@@ -3,8 +3,6 @@ from boundingBox import boundingBox
 
 def objectTracking(rawVideo):
     videodata = skvideo.io.vread(rawVideo)
-    print(videodata.shape)
-    print(videodata[0,:,:,:].shape)
     box_corner = boundingBox(videodata[0,:,:,:])
 
 
