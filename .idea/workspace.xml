@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9195d255-b929-4b49-8522-93d49e66abed" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/estimateAllTranslation.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/getFeatures.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testingFile.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boundingBox.py" beforeDir="false" afterPath="$PROJECT_DIR$/boundingBox.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objectTracking.py" beforeDir="false" afterPath="$PROJECT_DIR$/objectTracking.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -18,30 +18,32 @@
       <usages-collector id="statistics.lifecycle.project">
         <counts>
           <entry key="project.closed" value="4" />
+          <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.2" value="1" />
           <entry key="project.open.time.3" value="1" />
           <entry key="project.open.time.4" value="2" />
-          <entry key="project.opened" value="4" />
+          <entry key="project.opened" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="py" value="11" />
+          <entry key="py" value="22" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Python" value="11" />
+          <entry key="Python" value="22" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="398" />
+          <entry key="Python Console" value="112" />
+          <entry key="py" value="1480" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="398" />
+          <entry key="Python" value="1592" />
         </counts>
       </usages-collector>
     </session>
@@ -51,21 +53,66 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/objectTracking.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="228">
-              <caret line="12" column="14" selection-start-line="12" selection-start-column="14" selection-end-line="12" selection-end-column="14" />
+            <state relative-caret-position="190">
+              <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
               <folding>
                 <element signature="e#0#17#0" expanded="true" />
-                <marker date="1573849608832" expanded="true" signature="84:89" ph="..." />
+                <marker date="1573852666415" expanded="true" signature="101:106" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/getFeatures.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="266">
+              <caret line="14" column="78" selection-start-line="14" selection-start-column="78" selection-end-line="14" selection-end-column="78" />
+              <folding>
+                <element signature="e#438#473#0" expanded="true" />
+                <marker date="1573857323059" expanded="true" signature="1923:1924" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/maskImage.py">
+        <entry file="file://$PROJECT_DIR$/estimateAllTranslation.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="152">
-              <caret line="8" column="5" lean-forward="true" selection-start-line="8" selection-start-column="5" selection-end-line="8" selection-end-column="5" />
+            <state relative-caret-position="247">
+              <caret line="13" column="16" selection-start-line="13" selection-start-column="16" selection-end-line="13" selection-end-column="16" />
+              <folding>
+                <marker date="1573858097894" expanded="true" signature="840:866" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/testingFile.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="305">
+              <caret line="31" column="20" lean-forward="true" selection-start-line="31" selection-start-column="6" selection-end-line="31" selection-end-column="20" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../581_Image-Stitching/anms.py">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../581_Image-Stitching/corner_detector.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="253">
+              <caret line="20" column="51" lean-forward="true" selection-start-line="20" selection-start-column="2" selection-end-line="20" selection-end-column="51" />
+              <folding>
+                <element signature="e#401#429#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -74,10 +121,10 @@
         <entry file="file://$PROJECT_DIR$/boundingBox.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="95">
-              <caret line="6" column="38" selection-start-line="6" selection-start-column="38" selection-end-line="6" selection-end-column="38" />
+              <caret line="5" column="34" lean-forward="true" selection-start-line="5" selection-start-column="34" selection-end-line="5" selection-end-column="34" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
-                <marker date="1573850615440" expanded="true" signature="294:299" ph="..." />
+                <marker date="1573852666413" expanded="true" signature="275:280" ph="..." />
               </folding>
             </state>
           </provider>
@@ -86,8 +133,20 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/createMask.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="171">
-              <caret line="15" selection-start-line="15" selection-end-line="15" selection-end-column="29" />
+            <state relative-caret-position="270">
+              <caret line="23" column="4" lean-forward="true" selection-start-line="23" selection-start-column="4" selection-end-line="23" selection-end-column="23" />
+              <folding>
+                <element signature="e#85#115#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/Desktop/upenn学校文件/研一上/581 - CV/xuchenw_Project1/findDerivatives.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="103">
+              <caret line="8" selection-start-line="8" selection-end-line="8" selection-end-column="31" />
             </state>
           </provider>
         </entry>
@@ -95,7 +154,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$USER_HOME$/Desktop/upenn学校文件/研一上/581 - CV/xuchenw_Project1B/gradientBlending.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
+            <state relative-caret-position="209">
               <caret line="11" selection-start-line="11" selection-end-line="11" selection-end-column="17" />
             </state>
           </provider>
@@ -116,13 +175,18 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/objectTracking.py" />
-        <option value="$PROJECT_DIR$/boundingBox.py" />
         <option value="$PROJECT_DIR$/maskImage.py" />
+        <option value="$PROJECT_DIR$/../581_Image-Stitching/corner_detector.py" />
+        <option value="$PROJECT_DIR$/boundingBox.py" />
+        <option value="$PROJECT_DIR$/objectTracking.py" />
+        <option value="$PROJECT_DIR$/testingFile.py" />
+        <option value="$PROJECT_DIR$/getFeatures.py" />
+        <option value="$PROJECT_DIR$/estimateAllTranslation.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
+    <option name="x" value="16" />
     <option name="y" value="23" />
     <option name="width" value="1440" />
     <option name="height" value="798" />
@@ -135,7 +199,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Course" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -147,6 +210,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Course" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -165,7 +229,28 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.testingFile">
+    <configuration name="getFeatures" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="581_Optical-Flow" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/getFeatures.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="objectTracking" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="581_Optical-Flow" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -187,9 +272,37 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="testingFile" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="581_Optical-Flow" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/testingFile.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.objectTracking" />
+      <item itemvalue="Python.getFeatures" />
+      <item itemvalue="Python.testingFile" />
+    </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.testingFile" />
         <item itemvalue="Python.objectTracking" />
+        <item itemvalue="Python.getFeatures" />
       </list>
     </recent_temporary>
   </component>
@@ -197,20 +310,20 @@
     <configuration />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1440" height="798" extended-state="6" />
+    <frame x="37" y="23" width="1440" height="798" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24947146" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32833788" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32833788" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Python Console" order="8" weight="0.32967034" />
+      <window_info anchor="bottom" id="Python Console" order="8" weight="0.32833788" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -229,46 +342,117 @@
     <entry file="file://$USER_HOME$/Desktop/upenn学校文件/研一上/581 - CV/xuchenw_Project1B/maskImage.py" />
     <entry file="file://$USER_HOME$/Desktop/upenn学校文件/研一上/581 - CV/xuchenw_Project1B/drawMask.py" />
     <entry file="file://$USER_HOME$/Desktop/upenn学校文件/研一上/581 - CV/xuchenw_Project1B/createMask.py" />
-    <entry file="file://$PROJECT_DIR$/boundingBox.py">
+    <entry file="file://$PROJECT_DIR$/maskImage.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="8" column="5" selection-start-line="8" selection-start-column="5" selection-end-line="8" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../581_Image-Stitching/helper.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="95">
-          <caret line="6" column="38" selection-start-line="6" selection-start-column="38" selection-end-line="6" selection-end-column="38" />
+          <caret line="5" selection-start-line="5" selection-end-line="8" selection-end-column="34" />
           <folding>
-            <element signature="e#0#10#0" expanded="true" />
-            <marker date="1573850615440" expanded="true" signature="294:299" ph="..." />
+            <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/objectTracking.py">
+    <entry file="file://$PROJECT_DIR$/../581_Image-Stitching/mymosaic.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="12" column="14" selection-start-line="12" selection-start-column="14" selection-end-line="12" selection-end-column="14" />
-          <folding>
-            <element signature="e#0#17#0" expanded="true" />
-            <marker date="1573849608832" expanded="true" signature="84:89" ph="..." />
-          </folding>
+        <state relative-caret-position="69">
+          <caret line="96" column="27" lean-forward="true" selection-start-line="96" selection-start-column="13" selection-end-line="96" selection-end-column="27" />
         </state>
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/Desktop/upenn学校文件/研一上/581 - CV/xuchenw_Project1B/gradientBlending.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
+        <state relative-caret-position="209">
           <caret line="11" selection-start-line="11" selection-end-line="11" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/objectTracking.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+          <folding>
+            <element signature="e#0#17#0" expanded="true" />
+            <marker date="1573852666415" expanded="true" signature="101:106" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/boundingBox.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="5" column="34" lean-forward="true" selection-start-line="5" selection-start-column="34" selection-end-line="5" selection-end-column="34" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+            <marker date="1573852666413" expanded="true" signature="275:280" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../581_Image-Stitching/corner_detector.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="20" column="51" lean-forward="true" selection-start-line="20" selection-start-column="2" selection-end-line="20" selection-end-column="51" />
+          <folding>
+            <element signature="e#401#429#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../581_Image-Stitching/anms.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$USER_HOME$/Desktop/upenn学校文件/研一上/581 - CV/xuchenw_Project1/findDerivatives.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="103">
+          <caret line="8" selection-start-line="8" selection-end-line="8" selection-end-column="31" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/createMask.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="15" selection-start-line="15" selection-end-line="15" selection-end-column="29" />
+        <state relative-caret-position="270">
+          <caret line="23" column="4" lean-forward="true" selection-start-line="23" selection-start-column="4" selection-end-line="23" selection-end-column="23" />
+          <folding>
+            <element signature="e#85#115#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/maskImage.py">
+    <entry file="file://$PROJECT_DIR$/testingFile.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="8" column="5" lean-forward="true" selection-start-line="8" selection-start-column="5" selection-end-line="8" selection-end-column="5" />
+        <state relative-caret-position="305">
+          <caret line="31" column="20" lean-forward="true" selection-start-line="31" selection-start-column="6" selection-end-line="31" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/getFeatures.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="14" column="78" selection-start-line="14" selection-start-column="78" selection-end-line="14" selection-end-column="78" />
+          <folding>
+            <element signature="e#438#473#0" expanded="true" />
+            <marker date="1573857323059" expanded="true" signature="1923:1924" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/estimateAllTranslation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="13" column="16" selection-start-line="13" selection-start-column="16" selection-end-line="13" selection-end-column="16" />
+          <folding>
+            <marker date="1573858097894" expanded="true" signature="840:866" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
