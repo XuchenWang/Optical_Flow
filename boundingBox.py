@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import imutils
 from PIL import Image
 def boundingBox(firstFrame, maskNum):
-    coor_matrix = np.zeros((maskNum,4))
+    coor_matrix = np.zeros((4,maskNum))
 
     for ii in range(maskNum):
         mask = createMask.main(firstFrame)
@@ -19,11 +19,11 @@ def boundingBox(firstFrame, maskNum):
         # construct matrix
         w = x_max - x_min
         h = y_max - y_min
-        coor_matrix[ii,0] = x_min
-        coor_matrix[ii,1] = y_min
-        coor_matrix[ii,2] = w
-        coor_matrix[ii,3] = h
-
+        coor_matrix[0,ii] = x_min
+        coor_matrix[1,ii] = y_min
+        coor_matrix[2,ii] = w
+        coor_matrix[3,ii] = h
+        print(coor_matrix)
     return coor_matrix
 if __name__ == '__main__':
     coor_matrix = boundingBox('firstFrame.jpg', 2)

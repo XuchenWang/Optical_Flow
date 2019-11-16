@@ -4,7 +4,8 @@ import scipy.misc
 def objectTracking(rawVideo):
     videodata = skvideo.io.vread(rawVideo)
     scipy.misc.imsave('firstFrame.jpg', videodata[0,:,:,:])
-    # box_corner = boundingBox(videodata[0,:,:,:])
+    num_of_box = 1
+    coor_matrix = boundingBox('firstFrame.jpg',num_of_box)
 
 
 
