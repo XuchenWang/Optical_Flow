@@ -15,7 +15,7 @@ def objectTracking(rawVideo):
     videodata = videodata[:2,:,:,:] # ONLY for testing, need to be comment out
     scipy.misc.imsave('firstFrame.jpg', videodata[0,:,:,:])
     num_of_box = 1
-    expected_feat_per_box = 2
+    expected_feat_per_box = 8
 
     #for first frame
     img1_gray = rgb2gray(videodata[0,:,:,:])

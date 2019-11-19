@@ -37,23 +37,43 @@ def estimateFeatureTranslation(startX, startY, Ix, Iy, img1, img2, windowSize):
         Ix_window = interp2(Ix,xx,yy)
         Iy_window = interp2(Iy,xx,yy)
 
-        It_window = img1[img1_window_start_y:(img1_window_start_y+windowSize), \
-                    img1_window_start_x:(img1_window_start_x+windowSize)] - interp2(img2,yy,xx)
+        It_window = interp2(img2,xx,yy) - img1[img1_window_start_y:(img1_window_start_y+windowSize), \
+                    img1_window_start_x:(img1_window_start_x+windowSize)]
 
         #Build up Ax=-b and solve it to find (u,v)
-        second_moment=np.zeros([2,2])
-        second_moment[0,0] = np.sum(Ix_window*Ix_window)
-        second_moment[0,1] = np.sum(Ix_window*Iy_window)
-        second_moment[1,0] = np.sum(Iy_window*Ix_window)
-        second_moment[1,1] = np.sum(Iy_window*Iy_window)
-        b = np.zeros([2,1])
-        b[0,0] = np.sum(Ix_window*It_window)
-        b[1,0] = np.sum(Iy_window*It_window)
+        A = np.zeros([100,2])
+        A[:,0] = Ix_window.flatten()
+        A[:,1] = Iy_window.flatten()
+        b = It_window.flatten()
         b = -b
-        inverse_second_moment = np.linalg.inv(second_moment)
-        difference = np.dot(inverse_second_moment, b)
-        u = difference[0,0]
-        v = difference[1,0]
+
+        # difference = np.linalg.solve(A.transpose()@A,A.transpose()@b)
+
+        A_pinv = np.linalg.pinv(A.transpose()@A)
+
+        b = A.transpose()@b
+
+        difference = A_pinv@b
+
+
+
+
+
+        # second_moment=np.zeros([2,2])
+        # second_moment[0,0] = np.sum(Ix_window*Ix_window)
+        # second_moment[0,1] = np.sum(Ix_window*Iy_window)
+        # second_moment[1,0] = np.sum(Iy_window*Ix_window)
+        # second_moment[1,1] = np.sum(Iy_window*Iy_window)
+        # b = np.zeros([2,1])
+        # b[0,0] = np.sum(Ix_window*It_window)
+        # b[1,0] = np.sum(Iy_window*It_window)
+        # b = -b
+        # inverse_second_moment = np.linalg.inv(second_moment)
+        # difference = np.dot(inverse_second_moment, b)
+
+        # difference = np.linalg.lstsq(second_moment,b)[0]
+        u = difference[0]
+        v = difference[1]
 
         # updating
         # newX = newX + u

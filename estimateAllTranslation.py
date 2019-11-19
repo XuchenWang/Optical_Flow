@@ -21,7 +21,7 @@ def estimateAllTranslation(startXs, startYs, img1, img2):
     N,F = startXs.shape
 
     # compute derivative
-    dx, dy = np.gradient(helper.GaussianPDF_2D(0, 0.5, 5, 5), axis = (1,0))
+    dx, dy = np.gradient(helper.GaussianPDF_2D(0, 1, 10, 10), axis = (1,0))
     Ix = signal.convolve2d(img1,dx,'same')
     Iy = signal.convolve2d(img1,dy,'same')
     for f in range(F):
