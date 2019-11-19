@@ -1,9 +1,35 @@
 import numpy as np
 from skimage import transform as trans
 
+def xywh_to_ptsxy(bbox):
+    bbox_form = np.zeros((bbox.shape[0],4,2))
+    for i in range(bbox.shape[0]):
+        x,y,w,h = bbox[i,:]
+        corner_left_up = (x,y)
+        corner_right_up = (x+w,y)
+        corner_left_down = (x,y+h)
+        corner_right_down = (x+w,y+h)
+
+        bbox_form[i,0,:] = corner_left_up
+        bbox_form[i,1,:] = corner_right_up
+        bbox_form[i,2,:] = corner_left_down
+        bbox_form[i,3,:] = corner_right_down
+    return bbox_form
+
+def ptsxy_to_xywh(bbox_form):
+    bbox = np.zeros((bbox_form.shape[0],4))
+    for i in range(bbox_form.shape[0]):
+        corner_coor = bbox_form[i,:,:]
+        (x,y) = corner_coor[0,:]
+        w = corner_coor[1,0] - corner_coor[0,0]
+        h = corner_coor[2,1] - corner_coor[0,1]
+        bbox[i,:] = (x,y,w,h)
+    return bbox
+
 def applyGeometricTransformation(startXs, startYs, newXs, newYs, bbox):
     N, F = startXs.shape
-    _, window_corner_num, dim_num = bbox.shape
+    bbox_form = xywh_to_ptsxy(bbox)
+    _, window_corner_num, dim_num = bbox_form.shape
     # First we will filter the points whose distance is greater than
     dist_mat = np.sqrt((newXs-startXs)**2+(newYs-startYs)**2)
     filter_index = np.where(dist_mat > 4)
@@ -23,7 +49,7 @@ def applyGeometricTransformation(startXs, startYs, newXs, newYs, bbox):
     filter_startYs[filter_index] = -1
 
     # compulate the Similar matrix H for each window
-    newbbox = np.zeros((F,window_corner_num,dim_num))
+    newbbox_form = np.zeros((F,window_corner_num,dim_num))
     Xs = filter_newXs.copy()
     Ys = filter_newYs.copy()
     for i in range(F):
@@ -44,14 +70,14 @@ def applyGeometricTransformation(startXs, startYs, newXs, newYs, bbox):
         tform = trans.SimilarityTransform()
         H_matrix_i = tform.estimate(src, tar)
 
-        bbox_i = bbox[i,:,:]
+        bbox_i = bbox_form[i,:,:]
         aug_ones = np.ones(window_corner_num)
         aug_bbox_i = np.vstack((bbox_i, aug_ones))
 
         newbbox_i = H_matrix_i@aug_bbox_i
         newbbox_i = (newbbox_i/newbbox_i[2,:])[:2,:]
 
-        newbbox[i,:,:] = newbbox_i
+        newbbox_form[i,:,:] = newbbox_i
 
         bbox_i_x_min = np.min(newbbox_i[0])
         bbox_i_x_max = np.max(newbbox_i[0])
@@ -72,5 +98,6 @@ def applyGeometricTransformation(startXs, startYs, newXs, newYs, bbox):
 
         Xs[:,i] = Xs_i
         Ys[:,i] = Ys_i
+    newbbox = ptsxy_to_xywh(newbbox_form)
 
     return Xs, Ys, newbbox
