@@ -12,7 +12,7 @@ from applyGeometricTransformation import applyGeometricTransformation
 
 def objectTracking(rawVideo):
     videodata = skvideo.io.vread(rawVideo)
-    videodata = videodata[:2,:,:,:] # ONLY for testing, need to be comment out
+    videodata = videodata[:10,:,:,:] # ONLY for testing, need to be comment out
     scipy.misc.imsave('firstFrame.jpg', videodata[0,:,:,:])
     num_of_box = 1
     expected_feat_per_box = 8
@@ -29,6 +29,10 @@ def objectTracking(rawVideo):
     feat_x_flatten = feat_x.flatten()
     feat_y_flatten = feat_y.flatten()
     videodata[0,:,:,:][feat_y_flatten, feat_x_flatten] = [255,0,0]
+    videodata[0,:,:,:][feat_y_flatten-1, feat_x_flatten] = [255,0,0] #bigger points
+    videodata[0,:,:,:][feat_y_flatten+1, feat_x_flatten] = [255,0,0] #bigger points
+    videodata[0,:,:,:][feat_y_flatten, feat_x_flatten-1] = [255,0,0] #bigger points
+    videodata[0,:,:,:][feat_y_flatten, feat_x_flatten+1] = [255,0,0] #bigger points
     x = coor_matrix[:,0]
     y = coor_matrix[:,1]
     w = coor_matrix[:,2]
@@ -36,6 +40,7 @@ def objectTracking(rawVideo):
     upperleft_corner=(x,y)
     lowerright_corner = (x+w,y+h)
     videodata[0,:,:,:] = cv2.rectangle(videodata[0,:,:,:], upperleft_corner, lowerright_corner, (255, 0, 0), 2)
+    scipy.misc.imsave(str(0)+'thFrame.jpg', videodata[0,:,:,:])
     plt.imshow(videodata[0,:,:,:])
     plt.show()
 
@@ -49,6 +54,10 @@ def objectTracking(rawVideo):
         feat_x_flatten = np.vstack((feat_x_flatten,new_feat_x.flatten()))
         feat_y_flatten = np.vstack((feat_y_flatten,new_feat_y.flatten()))
         videodata[i,:,:,:][feat_y_flatten, feat_x_flatten] = [255,0,0]
+        videodata[i,:,:,:][feat_y_flatten-1, feat_x_flatten] = [255,0,0] #for bigger points
+        videodata[i,:,:,:][feat_y_flatten+1, feat_x_flatten] = [255,0,0]
+        videodata[i,:,:,:][feat_y_flatten, feat_x_flatten-1] = [255,0,0]
+        videodata[i,:,:,:][feat_y_flatten, feat_x_flatten+1] = [255,0,0]
         #plot bounding box
         x = new_coor_matrix[:,0]
         y = new_coor_matrix[:,1]
@@ -57,6 +66,7 @@ def objectTracking(rawVideo):
         upperleft_corner=(x,y)
         lowerright_corner = (x+w,y+h)
         videodata[i,:,:,:] = cv2.rectangle(videodata[i,:,:,:], upperleft_corner, lowerright_corner, (255, 0, 0), 2)
+        scipy.misc.imsave(str(i)+'thFrame.jpg', videodata[i,:,:,:])
         plt.imshow(videodata[i,:,:,:])
         plt.show()
 
