@@ -17,13 +17,13 @@ from interp import interp2
 def estimateFeatureTranslation(startX, startY, Ix, Iy, img1, img2, windowSize):
     newX = startX
     newY = startY
-    tol = 0.001
-    error = 1
+    tol = 0.1
+    # error = 1
     midWindow = np.floor(windowSize/2)
     img1_window_start_x = int(startX-midWindow)
     img1_window_start_y = int(startY-midWindow)
-
-    while (error > tol):
+    max_iter = 10**4
+    for _ in range(max_iter):
         window_start_x = int(newX-midWindow)
         window_start_y = int(newY-midWindow)
         window_end_x = int(window_start_x+windowSize)
@@ -34,8 +34,8 @@ def estimateFeatureTranslation(startX, startY, Ix, Iy, img1, img2, windowSize):
 
         xx,yy = np.meshgrid(x_range,y_range)
 
-        Ix_window = interp2(Ix,yy,xx)
-        Iy_window = interp2(Iy,yy,xx)
+        Ix_window = interp2(Ix,xx,yy)
+        Iy_window = interp2(Iy,xx,yy)
 
         It_window = img1[img1_window_start_y:(img1_window_start_y+windowSize), \
                     img1_window_start_x:(img1_window_start_x+windowSize)] - interp2(img2,yy,xx)
@@ -56,8 +56,18 @@ def estimateFeatureTranslation(startX, startY, Ix, Iy, img1, img2, windowSize):
         v = difference[1,0]
 
         # updating
-        newX = newX + u
-        newY = newY + v
-        error = np.linalg.norm(It_window)
+        # newX = newX + u
+        # newY = newY + v
+
+        ZX = newX + u
+        ZY = newY + v
+
+        if np.sqrt((ZX-newX)**2+(ZY-newY)**2)<tol:
+            return ZX, ZY
+
+        newX = ZX
+        newY = ZY
+
+        # error = np.linalg.norm(It_window)
 
     return newX, newY
