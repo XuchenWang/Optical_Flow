@@ -11,7 +11,7 @@
 """
 
 import numpy as np
-
+from interp import interp2
 
 # img1, img2: gray scale
 def estimateFeatureTranslation(startX, startY, Ix, Iy, img1, img2, windowSize):
@@ -26,11 +26,19 @@ def estimateFeatureTranslation(startX, startY, Ix, Iy, img1, img2, windowSize):
     while (error > tol):
         window_start_x = newX-midWindow
         window_start_y = newY-midWindow
+        window_end_x = window_start_x+windowSize+1
+        window_end_y = window_start_y+windowSize+1
 
-        Ix_window = Ix[window_start_y:(window_start_y + windowSize), window_start_x:(window_start_x + windowSize)]
-        Iy_window = Iy[window_start_y:(window_start_y + windowSize), window_start_x:(window_start_x + windowSize)]
+        x_range = np.arange(window_start_x,window_end_x)
+        y_range = np.arange(window_start_y,window_end_y)
+
+        xx,yy = np.meshgrid(x_range,y_range)
+
+        Ix_window = interp2(Ix,yy,xx)
+        Iy_window = interp2(Iy,yy,xx)
+
         It_window = img1[img1_window_start_y:(img1_window_start_y+windowSize), img1_window_start_x:(img1_window_start_x+windowSize)] - \
-            img2[window_start_y:(window_start_y + windowSize), window_start_x:(window_start_x + windowSize)]
+            interp2(img2,yy,xx)
 
         #Build up Ax=-b and solve it to find (u,v)
         second_moment=np.zeros([2,2])
