@@ -55,12 +55,12 @@ def applyGeometricTransformation(startXs, startYs, newXs, newYs, bbox):
     for i in range(F):
         # for each window, filter out the out-ranged pts
         src_pts_x = filter_startXs[:, i]
-        src_pts_x = src_pts_x[src_pts_x>=0]
+        src_pts_x = src_pts_x[src_pts_x>=0].reshape(-1,1)
         src_pts_y = filter_startYs[:, i]
         src_pts_y = src_pts_y[src_pts_y >= 0].reshape(-1,1)
 
         tar_pts_x = filter_newXs[:, i]
-        tar_pts_x = tar_pts_x[tar_pts_x >= 0]
+        tar_pts_x = tar_pts_x[tar_pts_x >= 0].reshape(-1,1)
         tar_pts_y = filter_newYs[:, i]
         tar_pts_y = tar_pts_y[tar_pts_y >= 0].reshape(-1,1)
 
@@ -68,16 +68,16 @@ def applyGeometricTransformation(startXs, startYs, newXs, newYs, bbox):
         tar = np.hstack((tar_pts_x,tar_pts_y))
 
         tform = trans.SimilarityTransform()
-        H_matrix_i = tform.estimate(src, tar)
-
-        bbox_i = bbox_form[i,:,:]
+        res = tform.estimate(tar, src)
+        H_matrix_i = tform.params
+        bbox_form_i = bbox_form[i,:,:]
         aug_ones = np.ones(window_corner_num)
-        aug_bbox_i = np.vstack((bbox_i, aug_ones))
+        aug_bbox_i = np.vstack((bbox_form_i.T, aug_ones))
 
         newbbox_i = H_matrix_i@aug_bbox_i
         newbbox_i = (newbbox_i/newbbox_i[2,:])[:2,:]
 
-        newbbox_form[i,:,:] = newbbox_i
+        newbbox_form[i,:,:] = newbbox_i.T
 
         bbox_i_x_min = np.min(newbbox_i[0])
         bbox_i_x_max = np.max(newbbox_i[0])
@@ -92,12 +92,13 @@ def applyGeometricTransformation(startXs, startYs, newXs, newYs, bbox):
         logic = np.logical_or(logic_x,logic_y)
 
         Xs_i = tar_pts_x.copy()
-        Xs_i[logic] = -1
         Ys_i = tar_pts_y.copy()
-        Ys_i[logic] = -1
+        if logic != []:
+            Xs_i[logic] = -1
+            Ys_i[logic] = -1
 
-        Xs[:,i] = Xs_i
-        Ys[:,i] = Ys_i
+        Xs[:,i] = Xs_i[:,0]
+        Ys[:,i] = Ys_i[:,0]
     newbbox = ptsxy_to_xywh(newbbox_form)
 
     return Xs, Ys, newbbox

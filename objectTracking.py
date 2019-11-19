@@ -43,20 +43,20 @@ def objectTracking(rawVideo):
     for i in range(1,videodata.shape[0]):
         img2_gray = rgb2gray(videodata[i,:,:,:])
         new_feat_x, new_feat_y = estimateAllTranslation(feat_x,feat_y,img1_gray,img2_gray)
-        # new_feat_x, new_feat_y, new_coor_matrix = applyGeometricTransformation(\
-        #     feat_x, feat_y, new_feat_x, new_feat_y, coor_matrix)
+        new_feat_x, new_feat_y, new_coor_matrix = applyGeometricTransformation(\
+            feat_x, feat_y, new_feat_x, new_feat_y, coor_matrix)
         #plot feature points
         feat_x_flatten = np.vstack((feat_x_flatten,new_feat_x.flatten()))
         feat_y_flatten = np.vstack((feat_y_flatten,new_feat_y.flatten()))
         videodata[i,:,:,:][feat_y_flatten, feat_x_flatten] = [255,0,0]
-        # #plot bounding box
-        # x = new_coor_matrix[:,0]
-        # y = new_coor_matrix[:,1]
-        # w = new_coor_matrix[:,2]
-        # h = new_coor_matrix[:,3]
-        # upperleft_corner=(x,y)
-        # lowerright_corner = (x+w,y+h)
-        # videodata[i,:,:,:] = cv2.rectangle(videodata[i,:,:,:], upperleft_corner, lowerright_corner, (255, 0, 0), 2)
+        #plot bounding box
+        x = new_coor_matrix[:,0]
+        y = new_coor_matrix[:,1]
+        w = new_coor_matrix[:,2]
+        h = new_coor_matrix[:,3]
+        upperleft_corner=(x,y)
+        lowerright_corner = (x+w,y+h)
+        videodata[i,:,:,:] = cv2.rectangle(videodata[i,:,:,:], upperleft_corner, lowerright_corner, (255, 0, 0), 2)
         plt.imshow(videodata[i,:,:,:])
         plt.show()
 
