@@ -16,8 +16,8 @@ from anms import anms
 # N is the expecting number of features in each object box
 def getFeatures(img, bbox, N):
     F = bbox.shape[0]
-    return_x = np.zeros([N,F])
-    return_y = np.zeros([N,F])
+    return_x = np.zeros([N,F]).astype(int)
+    return_y = np.zeros([N,F]).astype(int)
 
     for i in range(F):
         xywh = bbox[i,:]
@@ -25,6 +25,7 @@ def getFeatures(img, bbox, N):
         y = xywh[1]
         w = xywh[2]
         h = xywh[3]
+
         boxed_image = img[y:y+h, x:x+w]
 
         # alternatively ucing cv2.goodFeaturesToTrack for corner detector and anms
@@ -47,6 +48,7 @@ def getFeatures(img, bbox, N):
         # else:
         #     feat_x = np.concatenate((feat_x, np.array([0]*(N-curr_n))))
         #     feat_y = np.concatenate((feat_y, np.array([0]*(N-curr_n))))
+
         return_x[:,i] = feat_x
         return_y[:,i] = feat_y
 

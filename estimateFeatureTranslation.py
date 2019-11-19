@@ -20,14 +20,14 @@ def estimateFeatureTranslation(startX, startY, Ix, Iy, img1, img2, windowSize):
     tol = 0.001
     error = 1
     midWindow = np.floor(windowSize/2)
-    img1_window_start_x = startX-midWindow
-    img1_window_start_y = startY-midWindow
+    img1_window_start_x = int(startX-midWindow)
+    img1_window_start_y = int(startY-midWindow)
 
     while (error > tol):
-        window_start_x = newX-midWindow
-        window_start_y = newY-midWindow
-        window_end_x = window_start_x+windowSize+1
-        window_end_y = window_start_y+windowSize+1
+        window_start_x = int(newX-midWindow)
+        window_start_y = int(newY-midWindow)
+        window_end_x = int(window_start_x+windowSize)
+        window_end_y = int(window_start_y+windowSize)
 
         x_range = np.arange(window_start_x,window_end_x)
         y_range = np.arange(window_start_y,window_end_y)
@@ -37,8 +37,8 @@ def estimateFeatureTranslation(startX, startY, Ix, Iy, img1, img2, windowSize):
         Ix_window = interp2(Ix,yy,xx)
         Iy_window = interp2(Iy,yy,xx)
 
-        It_window = img1[img1_window_start_y:(img1_window_start_y+windowSize), img1_window_start_x:(img1_window_start_x+windowSize)] - \
-            interp2(img2,yy,xx)
+        It_window = img1[img1_window_start_y:(img1_window_start_y+windowSize), \
+                    img1_window_start_x:(img1_window_start_x+windowSize)] - interp2(img2,yy,xx)
 
         #Build up Ax=-b and solve it to find (u,v)
         second_moment=np.zeros([2,2])
@@ -58,10 +58,6 @@ def estimateFeatureTranslation(startX, startY, Ix, Iy, img1, img2, windowSize):
         # updating
         newX = newX + u
         newY = newY + v
-
-        error = It_window
-
-
-
+        error = np.linalg.norm(It_window)
 
     return newX, newY
