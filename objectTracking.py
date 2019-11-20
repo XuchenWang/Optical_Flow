@@ -16,7 +16,7 @@ def objectTracking(rawVideo):
     videodata = videodata[:50,:,:,:] # ONLY for testing, need to be comment out
     scipy.misc.imsave('firstFrame.jpg', videodata[0,:,:,:])
     num_of_box = 2
-    expected_feat_per_box = 4
+    expected_feat_per_box = 10
     windowSize = 10
 
     #for first frame
