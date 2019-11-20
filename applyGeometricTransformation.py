@@ -17,7 +17,7 @@ def xywh_to_ptsxy(bbox):
     return bbox_form
 
 def ptsxy_to_xywh(bbox_form):
-    bbox = np.zeros((bbox_form.shape[0],4))
+    bbox = np.zeros((bbox_form.shape[0],4)).astype(int)
     for i in range(bbox_form.shape[0]):
         corner_coor = bbox_form[i,:,:]
         (x,y) = corner_coor[0,:]
@@ -79,16 +79,23 @@ def applyGeometricTransformation(startXs, startYs, newXs, newYs, bbox):
 
         # newbbox_form[i,:,:] = newbbox_i.T
 
+        '''reconstruct a augmented box to regulate the rotated box(mapped by H matrix)'''
         aug_box_x_min = np.min(newbbox_i[0,:])
         aug_box_x_max = np.max(newbbox_i[0,:])
 
         aug_box_y_min = np.min(newbbox_i[1,:])
         aug_box_y_max = np.max(newbbox_i[1,:])
 
-        newbbox_i[:,0] = np.array([aug_box_x_min,aug_box_y_min])
-        newbbox_i[:,1] = np.array([aug_box_x_max,aug_box_y_min])
-        newbbox_i[:,2] = np.array([aug_box_x_min,aug_box_y_max])
-        newbbox_i[:,3] = np.array([aug_box_x_max,aug_box_y_max])
+        left_up_x = np.round((newbbox_i[0,0]+newbbox_i[0,2])/2).astype(int)
+        left_up_y = np.round((newbbox_i[1,0]+newbbox_i[1,1])/2).astype(int)
+
+        right_up_x = np.round((newbbox_i[0,1]+newbbox_i[0,3])/2).astype(int)
+        left_down_y = np.round((newbbox_i[1,2]+newbbox_i[1,3])/2).astype(int)
+
+        newbbox_i[:,0] = np.array([left_up_x,left_up_y])
+        newbbox_i[:,1] = np.array([right_up_x,left_up_y])
+        newbbox_i[:,2] = np.array([left_up_x,left_down_y])
+        newbbox_i[:,3] = np.array([right_up_x,left_down_y])
 
         newbbox_form[i,:,:] = newbbox_i.T
 
@@ -99,17 +106,14 @@ def applyGeometricTransformation(startXs, startYs, newXs, newYs, bbox):
         bbox_i_y_max = np.max(newbbox_i[1])
 
         # as long as one of the coor is out, the point is out
-        logic_x = np.logical_or(np.where(filter_newXs[:, i]>bbox_i_x_max),\
-                                np.where(filter_newXs[:, i]<bbox_i_x_min))
-        logic_y = np.logical_or(np.where(filter_newYs[:, i] > bbox_i_y_max), \
-                                np.where(filter_newYs[:, i] < bbox_i_y_min))
-        logic = np.logical_or(logic_x,logic_y)
-
         Xs_i = filter_newXs[:, i].copy()
         Ys_i = filter_newYs[:, i].copy()
-        if logic != []:
-            Xs_i[logic] = -1
-            Ys_i[logic] = -1
+
+        Xs_i[np.where(filter_newXs[:, i]>bbox_i_x_max)] = -1
+        Xs_i[np.where(filter_newXs[:, i]<bbox_i_x_min)] = -1
+
+        Ys_i[np.where(filter_newYs[:, i]>bbox_i_y_max)] = -1
+        Ys_i[np.where(filter_newYs[:, i]<bbox_i_y_min)] = -1
 
         Xs[:,i] = Xs_i[:]
         Ys[:,i] = Ys_i[:]

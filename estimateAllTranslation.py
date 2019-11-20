@@ -15,7 +15,7 @@ from estimateFeatureTranslation import estimateFeatureTranslation
 
 # startXs: N × F
 # img1, img2: H×W
-def estimateAllTranslation(startXs, startYs, img1, img2):
+def estimateAllTranslation(startXs, startYs, img1, img2, windowSize=10):
     newXs = startXs.copy()
     newYs = startYs.copy()
     N,F = startXs.shape
@@ -28,11 +28,11 @@ def estimateAllTranslation(startXs, startYs, img1, img2):
         for n in range(N):
             startX = startXs[n,f]
             startY = startYs[n,f]
-            if (startX==-1 or startY==-1):
+            if (startX<windowSize or startY<windowSize):
                 newXs[n,f] = -1
                 newYs[n,f] = -1
             else:
-                new_x, new_y = estimateFeatureTranslation(startX, startY, Ix, Iy, img1, img2, windowSize=10)
+                new_x, new_y = estimateFeatureTranslation(startX, startY, Ix, Iy, img1, img2, windowSize)
                 newXs[n,f] = new_x
                 newYs[n,f] = new_y
 
