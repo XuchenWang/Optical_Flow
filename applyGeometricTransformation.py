@@ -68,7 +68,7 @@ def applyGeometricTransformation(startXs, startYs, newXs, newYs, bbox):
         tar = np.hstack((tar_pts_x,tar_pts_y))
 
         tform = trans.SimilarityTransform()
-        res = tform.estimate(tar, src)
+        tform.estimate(src, tar)
         H_matrix_i = tform.params
         bbox_form_i = bbox_form[i,:,:]
         aug_ones = np.ones(window_corner_num)
@@ -77,7 +77,21 @@ def applyGeometricTransformation(startXs, startYs, newXs, newYs, bbox):
         newbbox_i = H_matrix_i@aug_bbox_i
         newbbox_i = (newbbox_i/newbbox_i[2,:])[:2,:]
 
+        # newbbox_form[i,:,:] = newbbox_i.T
+
+        aug_box_x_min = np.min(newbbox_i[0,:])
+        aug_box_x_max = np.max(newbbox_i[0,:])
+
+        aug_box_y_min = np.min(newbbox_i[1,:])
+        aug_box_y_max = np.max(newbbox_i[1,:])
+
+        newbbox_i[:,0] = np.array([aug_box_x_min,aug_box_y_min])
+        newbbox_i[:,1] = np.array([aug_box_x_max,aug_box_y_min])
+        newbbox_i[:,2] = np.array([aug_box_x_min,aug_box_y_max])
+        newbbox_i[:,3] = np.array([aug_box_x_max,aug_box_y_max])
+
         newbbox_form[i,:,:] = newbbox_i.T
+
 
         bbox_i_x_min = np.min(newbbox_i[0])
         bbox_i_x_max = np.max(newbbox_i[0])
@@ -85,20 +99,20 @@ def applyGeometricTransformation(startXs, startYs, newXs, newYs, bbox):
         bbox_i_y_max = np.max(newbbox_i[1])
 
         # as long as one of the coor is out, the point is out
-        logic_x = np.logical_or(np.where(tar_pts_x>bbox_i_x_max),\
-                                np.where(tar_pts_x<bbox_i_x_min))
-        logic_y = np.logical_or(np.where(tar_pts_y > bbox_i_y_max), \
-                                np.where(tar_pts_y < bbox_i_y_min))
+        logic_x = np.logical_or(np.where(filter_newXs[:, i]>bbox_i_x_max),\
+                                np.where(filter_newXs[:, i]<bbox_i_x_min))
+        logic_y = np.logical_or(np.where(filter_newYs[:, i] > bbox_i_y_max), \
+                                np.where(filter_newYs[:, i] < bbox_i_y_min))
         logic = np.logical_or(logic_x,logic_y)
 
-        Xs_i = tar_pts_x.copy()
-        Ys_i = tar_pts_y.copy()
+        Xs_i = filter_newXs[:, i].copy()
+        Ys_i = filter_newYs[:, i].copy()
         if logic != []:
             Xs_i[logic] = -1
             Ys_i[logic] = -1
 
-        Xs[:,i] = Xs_i[:,0]
-        Ys[:,i] = Ys_i[:,0]
+        Xs[:,i] = Xs_i[:]
+        Ys[:,i] = Ys_i[:]
     newbbox = ptsxy_to_xywh(newbbox_form)
 
     return Xs, Ys, newbbox

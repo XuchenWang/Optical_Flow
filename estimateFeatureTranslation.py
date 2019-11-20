@@ -15,6 +15,14 @@ from interp import interp2
 
 # img1, img2: gray scale
 def estimateFeatureTranslation(startX, startY, Ix, Iy, img1, img2, windowSize):
+    # # pad the images and coordinator
+    # img1 = np.pad(img1, ((windowSize, windowSize), (windowSize, windowSize)), 'constant')
+    # img2 = np.pad(img2, ((windowSize, windowSize), (windowSize, windowSize)), 'constant')
+    # Ix = np.pad(Ix, ((windowSize, windowSize), (windowSize, windowSize)), 'constant')
+    # Iy = np.pad(Iy, ((windowSize, windowSize), (windowSize, windowSize)), 'constant')
+    # startX = startX + windowSize
+    # startY = startY + windowSize
+
     newX = startX
     newY = startY
     tol = 0.1
@@ -22,7 +30,7 @@ def estimateFeatureTranslation(startX, startY, Ix, Iy, img1, img2, windowSize):
     midWindow = np.floor(windowSize/2)
     img1_window_start_x = int(startX-midWindow)
     img1_window_start_y = int(startY-midWindow)
-    max_iter = 10**4
+    max_iter = 100
     for _ in range(max_iter):
         window_start_x = int(newX-midWindow)
         window_start_y = int(newY-midWindow)
@@ -90,4 +98,6 @@ def estimateFeatureTranslation(startX, startY, Ix, Iy, img1, img2, windowSize):
 
         # error = np.linalg.norm(It_window)
 
+    # newX = newX-windowSize
+    # newY = newY-windowSize
     return newX, newY

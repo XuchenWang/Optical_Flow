@@ -12,7 +12,7 @@ from applyGeometricTransformation import applyGeometricTransformation
 
 def objectTracking(rawVideo):
     videodata = skvideo.io.vread(rawVideo)
-    videodata = videodata[:10,:,:,:] # ONLY for testing, need to be comment out
+    videodata = videodata[:30,:,:,:] # ONLY for testing, need to be comment out
     scipy.misc.imsave('firstFrame.jpg', videodata[0,:,:,:])
     num_of_box = 1
     expected_feat_per_box = 8

@@ -28,8 +28,12 @@ def estimateAllTranslation(startXs, startYs, img1, img2):
         for n in range(N):
             startX = startXs[n,f]
             startY = startYs[n,f]
-            new_x, new_y = estimateFeatureTranslation(startX, startY, Ix, Iy, img1, img2, windowSize=10)
-            newXs[n,f] = new_x
-            newYs[n,f] = new_y
+            if (startX==-1 or startY==-1):
+                newXs[n,f] = -1
+                newYs[n,f] = -1
+            else:
+                new_x, new_y = estimateFeatureTranslation(startX, startY, Ix, Iy, img1, img2, windowSize=10)
+                newXs[n,f] = new_x
+                newYs[n,f] = new_y
 
     return newXs, newYs
