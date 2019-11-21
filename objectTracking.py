@@ -12,10 +12,10 @@ import imageio
 
 def objectTracking(rawVideo):
     videodata = skvideo.io.vread(rawVideo)
-    videodata = videodata[:100,:,:,:] # ONLY for testing, need to be comment out
+    videodata = videodata[250:350,:,:,:] # ONLY for testing, need to be comment out
     # scipy.misc.imsave('firstFrame.jpg', videodata[0,:,:,:])
     imageio.imwrite('firstFrame.jpg', videodata[0,:,:,:])
-    num_of_box = 2
+    num_of_box = 1
     expected_feat_per_box = 10
     windowSize = 10
 
@@ -48,13 +48,16 @@ def objectTracking(rawVideo):
         new_feat_x, new_feat_y, new_coor_matrix = applyGeometricTransformation(\
             feat_x, feat_y, new_feat_x, new_feat_y, coor_matrix)
         #plot feature points
-        feat_x_flatten = np.vstack((feat_x_flatten,new_feat_x.flatten()))
-        feat_y_flatten = np.vstack((feat_y_flatten,new_feat_y.flatten()))
+        # feat_x_flatten = np.vstack((feat_x_flatten,new_feat_x.flatten()))
+        # feat_y_flatten = np.vstack((feat_y_flatten,new_feat_y.flatten()))
+        videodata[i, :, :, :][new_feat_y.flatten(), new_feat_x.flatten()] = [255, 0, 0]
         videodata[i,:,:,:][feat_y_flatten, feat_x_flatten] = [255,0,0]
         videodata[i,:,:,:][feat_y_flatten-1, feat_x_flatten] = [255,0,0] #for bigger points
         videodata[i,:,:,:][feat_y_flatten+1, feat_x_flatten] = [255,0,0]
         videodata[i,:,:,:][feat_y_flatten, feat_x_flatten-1] = [255,0,0]
         videodata[i,:,:,:][feat_y_flatten, feat_x_flatten+1] = [255,0,0]
+        feat_x_flatten = np.vstack((feat_x_flatten, new_feat_x.flatten()))
+        feat_y_flatten = np.vstack((feat_y_flatten, new_feat_y.flatten()))
 
         #plot bounding box
         x = new_coor_matrix[:,0]
@@ -66,7 +69,7 @@ def objectTracking(rawVideo):
         for j in range(x.shape[0]):
             videodata[i,:,:,:] = cv2.rectangle(videodata[i,:,:,:], tuple(upperleft_corner[:,j]), tuple(lowerright_corner[:,j]), (255, 0, 0), 2)
         # scipy.misc.imsave(str(i)+'thFrame.jpg', videodata[i,:,:,:])
-        imageio.imwrite(str(i)+'thFrame.jpg', videodata[i,:,:,:])
+        # imageio.imwrite(str(i)+'thFrame.jpg', videodata[i,:,:,:])
         # plt.imshow(videodata[i,:,:,:])
         # plt.show()
 
@@ -81,6 +84,6 @@ def objectTracking(rawVideo):
         imageio.mimsave('./eval_tracking.gif', tracking_list)
 
 if __name__== '__main__':
-    file_name = 'Easy.mp4'
+    file_name = 'Medium.mp4'
     objectTracking(file_name)
 

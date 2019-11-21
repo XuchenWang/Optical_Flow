@@ -10,7 +10,7 @@ def estimateFeatureTranslation(startX, startY, Ix, Iy, img1, img2, windowSize):
     midWindow = np.floor(windowSize/2)
     img1_window_start_x = int(startX-midWindow)
     img1_window_start_y = int(startY-midWindow)
-    max_iter = 1000
+    max_iter = 10
 
     for _ in range(max_iter):
         window_start_x = int(newX-midWindow)
