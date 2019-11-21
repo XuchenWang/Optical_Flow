@@ -1,6 +1,5 @@
 import skvideo.io
 from boundingBox import boundingBox
-import scipy.misc
 from getFeatures import getFeatures
 from helper import rgb2gray
 from estimateAllTranslation import estimateAllTranslation
@@ -13,8 +12,9 @@ import imageio
 
 def objectTracking(rawVideo):
     videodata = skvideo.io.vread(rawVideo)
-    videodata = videodata[:50,:,:,:] # ONLY for testing, need to be comment out
-    scipy.misc.imsave('firstFrame.jpg', videodata[0,:,:,:])
+    videodata = videodata[:100,:,:,:] # ONLY for testing, need to be comment out
+    # scipy.misc.imsave('firstFrame.jpg', videodata[0,:,:,:])
+    imageio.imwrite('firstFrame.jpg', videodata[0,:,:,:])
     num_of_box = 2
     expected_feat_per_box = 10
     windowSize = 10
@@ -38,7 +38,8 @@ def objectTracking(rawVideo):
     lowerright_corner = np.array([x+w,y+h])
     for i in range(x.shape[0]):
         videodata[0,:,:,:] = cv2.rectangle(videodata[0,:,:,:], tuple(upperleft_corner[:,i]), tuple(lowerright_corner[:,i]), (255, 0, 0), 2)
-    scipy.misc.imsave(str(0)+'thFrame.jpg', videodata[0,:,:,:])
+    # scipy.misc.imsave(str(0)+'thFrame.jpg', videodata[0,:,:,:])
+    imageio.imwrite(str(0)+'thFrame.jpg', videodata[0,:,:,:])
 
 
     for i in range(1,videodata.shape[0]):
@@ -64,7 +65,8 @@ def objectTracking(rawVideo):
         lowerright_corner = np.array([x+w,y+h])
         for j in range(x.shape[0]):
             videodata[i,:,:,:] = cv2.rectangle(videodata[i,:,:,:], tuple(upperleft_corner[:,j]), tuple(lowerright_corner[:,j]), (255, 0, 0), 2)
-        scipy.misc.imsave(str(i)+'thFrame.jpg', videodata[i,:,:,:])
+        # scipy.misc.imsave(str(i)+'thFrame.jpg', videodata[i,:,:,:])
+        imageio.imwrite(str(i)+'thFrame.jpg', videodata[i,:,:,:])
         # plt.imshow(videodata[i,:,:,:])
         # plt.show()
 
