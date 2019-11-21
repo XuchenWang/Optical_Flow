@@ -32,7 +32,7 @@ def applyGeometricTransformation(startXs, startYs, newXs, newYs, bbox):
     _, window_corner_num, dim_num = bbox_form.shape
     # First we will filter the points whose distance is greater than
     dist_mat = np.sqrt((newXs-startXs)**2+(newYs-startYs)**2)
-    filter_index = np.where(dist_mat > 5)
+    filter_index = np.where(dist_mat > 10)
 
     # filtered new points
     filter_newXs = newXs.copy()
@@ -111,9 +111,15 @@ def applyGeometricTransformation(startXs, startYs, newXs, newYs, bbox):
 
         Xs_i[np.where(filter_newXs[:, i]>bbox_i_x_max)] = -1
         Xs_i[np.where(filter_newXs[:, i]<bbox_i_x_min)] = -1
+        Xs_i[np.where(filter_newYs[:, i]>bbox_i_y_max)] = -1
+        Xs_i[np.where(filter_newYs[:, i]<bbox_i_y_min)] = -1
+
 
         Ys_i[np.where(filter_newYs[:, i]>bbox_i_y_max)] = -1
         Ys_i[np.where(filter_newYs[:, i]<bbox_i_y_min)] = -1
+        Ys_i[np.where(filter_newXs[:, i]>bbox_i_x_max)] = -1
+        Ys_i[np.where(filter_newXs[:, i]<bbox_i_x_min)] = -1
+
 
         Xs[:,i] = Xs_i[:]
         Ys[:,i] = Ys_i[:]
