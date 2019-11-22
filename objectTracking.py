@@ -12,11 +12,11 @@ import imageio
 
 def objectTracking(rawVideo):
     videodata = skvideo.io.vread(rawVideo)
-    videodata = videodata[250:350,:,:,:] # ONLY for testing, need to be comment out
+    videodata = videodata[:120,:,:,:] # ONLY for testing, need to be comment out
     # scipy.misc.imsave('firstFrame.jpg', videodata[0,:,:,:])
     imageio.imwrite('firstFrame.jpg', videodata[0,:,:,:])
-    num_of_box = 1
-    expected_feat_per_box = 10
+    num_of_box = 2
+    expected_feat_per_box = 15
     windowSize = 10
 
     #for first frame
@@ -70,8 +70,9 @@ def objectTracking(rawVideo):
             videodata[i,:,:,:] = cv2.rectangle(videodata[i,:,:,:], tuple(upperleft_corner[:,j]), tuple(lowerright_corner[:,j]), (255, 0, 0), 2)
         # scipy.misc.imsave(str(i)+'thFrame.jpg', videodata[i,:,:,:])
         # imageio.imwrite(str(i)+'thFrame.jpg', videodata[i,:,:,:])
-        # plt.imshow(videodata[i,:,:,:])
-        # plt.show()
+        plt.imshow(videodata[i,:,:,:])
+        plt.show()
+        plt.close()
 
         #updating
         img1_gray = img2_gray
@@ -84,6 +85,6 @@ def objectTracking(rawVideo):
         imageio.mimsave('./eval_tracking.gif', tracking_list)
 
 if __name__== '__main__':
-    file_name = 'Medium.mp4'
+    file_name = 'easy.mp4'
     objectTracking(file_name)
 
